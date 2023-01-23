@@ -54,7 +54,6 @@
 - (void) setOnFastImageLoadStart: (RCTDirectEventBlock)onFastImageLoadStart {
     if (_source && !self.hasSentOnLoadStart) {
         _onFastImageLoadStart = onFastImageLoadStart;
-        onFastImageLoadStart(@{});
         self.hasSentOnLoadStart = YES;
     } else {
         _onFastImageLoadStart = onFastImageLoadStart;
@@ -224,7 +223,18 @@
               }
 #else
         if (self.onFastImageLoadStart) {
-            self.onFastImageLoadStart(@{});
+            NSString* cachePath = [[SDImageCache sharedImageCache] cachePathForKey:url];
+            BOOL isCached = [[SDImageCache sharedImageCache] diskImageDataExistsWithKey:url];
+            if (isCached) {
+                self.onFastImageLoadStart(@{
+                    @"cachePath": cachePath
+                });
+            }
+            else {
+                self.onFastImageLoadStart(@{
+                    @"cachePath": [NSNull null]
+                });
+            }
             self.hasSentOnLoadStart = YES;
         } else {
             self.hasSentOnLoadStart = NO;

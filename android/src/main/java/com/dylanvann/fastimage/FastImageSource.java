@@ -107,6 +107,7 @@ public class FastImageSource extends ImageSource {
     }
 
     public GlideUrl getGlideUrl() {
-        return new GlideUrl(getUri().toString(), getHeaders());
+        // TODO: Using HTTPS results in images not being loaded due to SSLHandshakeException
+        return new GlideUrl(getUri().buildUpon().scheme("http").build().toString(), getHeaders());
     }
 }

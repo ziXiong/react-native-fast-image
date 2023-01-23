@@ -42,7 +42,6 @@ public class FastImageRequestListener implements RequestListener<Drawable> {
         if (eventDispatcher == null) {
             return false;
         }
-        eventDispatcher.dispatchEvent(new OnErrorEvent(viewId));
         eventDispatcher.dispatchEvent(new OnLoadEndEvent(viewId));
         return false;
     }

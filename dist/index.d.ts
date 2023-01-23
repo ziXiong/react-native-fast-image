@@ -27,6 +27,11 @@ export declare type Source = {
     priority?: Priority;
     cache?: Cache;
 };
+export interface OnLoadStartEvent {
+    nativeEvent: {
+        cachePath: string | null;
+    };
+}
 export interface OnLoadEvent {
     nativeEvent: {
         width: number;
@@ -57,7 +62,7 @@ export interface FastImageProps extends AccessibilityProps, ViewProps {
     defaultSource?: ImageRequireSource;
     resizeMode?: ResizeMode;
     fallback?: boolean;
-    onLoadStart?(): void;
+    onLoadStart?(event: OnLoadStartEvent): void;
     onProgress?(event: OnProgressEvent): void;
     onLoad?(event: OnLoadEvent): void;
     onError?(): void;
