@@ -79,7 +79,7 @@ def glideVersion = safeExtGet('glideVersion', '4.12.0')
 dependencies {
     //noinspection GradleDynamicVersion
     if (isNewArchitectureEnabled()) {
-        implementation project(":ReactAndroid")
+        implementation 'com.facebook.react:react-android'
     } else {
         implementation 'com.facebook.react:react-native:+'
     }
